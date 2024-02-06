@@ -18,11 +18,11 @@ function Header() {
 
     return (
         <HeaderContainer style={{ border: "2px solid black", height: '100px' }}>
-            <nav className='navbar navbar-expand-md fixed-top'>
+            <nav className='navbar navbar-expand-md bg-light fixed-top'>
                 <div className="container-xxl">
                     <Link to="/" className="navbar-brand py-0"><LogoImg src={logo} alt="logo" /></Link>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                         <ul className="navbar-nav">

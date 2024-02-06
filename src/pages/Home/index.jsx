@@ -1,19 +1,36 @@
-import ArticleCard from '../../components/ArticleCard';
+import Articles from '../../components/Articles';
+import styled from 'styled-components';
+import { useFetch } from '../../utils/hooks'
+import { Loader } from '../../utils/style/Atoms';
 
 
+
+const PageTitle = styled.h1`
+  font-size: 30px;
+  text-align: center;
+  padding-top : 30px;
+  padding-bottom: 30px;
+
+`
 
 function Home() {
-  return (
-    <div >
-      <h1>Articles</h1>
-      <ArticleCard
-        title="Lynk Global finalizes SPAC merger deal"
-        url="https://spacenews.com/lynk-global-finalizes-spac-merger-deal/"
-        image_url="https://i0.wp.com/spacenews.com/wp-content/uploads/2024/02/Lynk-overview.png"
-        news_site="SpaceNews"
-        summary="Lynk Global has agreed to a merger that would raise money for the direct-to-smartphone operator and list its shares on Nasdaq, the venture said Feb. 5 in a regulatory filing that details its revenue projections for the emerging market."
-        published_at="2024-02-06T02:47:58Z" />
 
+  //Get articles using custom hook : 
+  const { data, isLoading, error } = useFetch("https://api.spaceflightnewsapi.net/v4/articles/");
+
+  //get lsit of articles : 
+  const articlesList = data?.results;
+
+  if (error[0]) {
+    return (<span>Get an issue : {error[1]}</span>)
+  }
+
+  return (
+    <div className='container-xxl'>
+      <PageTitle>Latest news</PageTitle>
+      {isLoading ? (<Loader />) :
+        (<Articles articlesList={articlesList} />)
+      }
     </div>
   );
 }
