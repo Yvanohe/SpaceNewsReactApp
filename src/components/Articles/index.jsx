@@ -1,5 +1,6 @@
 import Card from "../Card"
 import styled from 'styled-components';
+import { useState, useEffect } from 'react'
 
 
 const CardsContainer = styled.div`
@@ -11,26 +12,42 @@ const CardsContainer = styled.div`
     
   `
 
-function Articles({ articlesList }) {
+function Articles({ articlesList, onlyFavourites }) {
+    // console.log(articlesList);
+    //retrieve favourites articles from local storage :
+    const favourites = localStorage.getItem('fav')
+    //use state to re-render if changes :
+    const [fav, setFav] = useState(favourites ? JSON.parse(favourites) : []);
+    //Each time fav change : the array is saved on localstorage
+    useEffect(() => { localStorage.setItem("fav", JSON.stringify(fav)) }, [fav]);
 
+    //if onlyFavourites : filter ArticlesList with ids in fav
+    var filteredArticlesList = articlesList;
+    // console.log("heeeho :", filteredArticlesList);
 
+    if (onlyFavourites) {
+        filteredArticlesList = articlesList.filter((article) => fav.includes(article.id))
+    }
 
     return (
         <CardsContainer>
-            {articlesList?.map((article) =>
+            {filteredArticlesList?.map((article) =>
             (
                 <Card
                     key={article.id}
+                    id={article.id}
                     title={article.title}
                     url={article.url}
                     image_url={article.image_url}
                     news_site={article.news_site}
                     summary={article.summary}
-                    published_at={article.published_at} />
+                    published_at={article.published_at}
+                    fav={fav}
+                    setFav={setFav}
+                    isFavourite={fav.find((element) => element === article.id) ? true : false} />
             )
             )}
         </CardsContainer>
-
     )
 
 

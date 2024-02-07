@@ -24,3 +24,5 @@ export function useFetch(url) {
     }, [url])
     return { isLoading, data, error }
 }
+
+

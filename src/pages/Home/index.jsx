@@ -10,28 +10,35 @@ const PageTitle = styled.h1`
   text-align: center;
   padding-top : 30px;
   padding-bottom: 30px;
+`
 
+const HomeContainer = styled.div`
+display : flex;
+flex-direction : column;
+justify-content : center;
+align-items: center;
 `
 
 function Home() {
 
-  //Get articles using custom hook : 
+  //Get articles using custom hook  : 
   const { data, isLoading, error } = useFetch("https://api.spaceflightnewsapi.net/v4/articles/");
 
-  //get lsit of articles : 
+  // list of articles : 
   const articlesList = data?.results;
+
 
   if (error[0]) {
     return (<span>Get an issue : {error[1]}</span>)
   }
 
   return (
-    <div className='container-xxl'>
+    <HomeContainer className='container-xxl'>
       <PageTitle>Latest news</PageTitle>
       {isLoading ? (<Loader />) :
-        (<Articles articlesList={articlesList} />)
+        (<Articles articlesList={articlesList} onlyFavourites={false} />)
       }
-    </div>
+    </HomeContainer>
   );
 }
 

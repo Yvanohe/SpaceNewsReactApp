@@ -6,19 +6,27 @@ import { StyledLink } from '../../utils/style/Atoms'
 
 //styled component for logo :
 const LogoImg = styled.img`
-width : 80px;
-height : 80px;
+width : 120px;
+height : 120px;
 `
 
 const HeaderContainer = styled.header`
-height : 100px;
+height : 150px;
+border: "2px solid black";
 `
 
-function Header() {
+const NavBar = styled.nav`
+position : fixed ;
+top:0;
+right : 0;
+left : 0;
+z-index:1000;
+`
+const Header = () => {
 
     return (
-        <HeaderContainer style={{ border: "2px solid black", height: '100px' }}>
-            <nav className='navbar navbar-expand-md bg-light fixed-top'>
+        <HeaderContainer>
+            <NavBar className='navbar navbar-expand-md bg-light'>
                 <div className="container-xxl">
                     <Link to="/" className="navbar-brand py-0"><LogoImg src={logo} alt="logo" /></Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,7 +40,7 @@ function Header() {
                         </ul>
                     </div>
                 </div>
-            </nav>
+            </NavBar>
         </HeaderContainer>
     )
 }
