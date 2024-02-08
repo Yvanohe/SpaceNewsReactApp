@@ -60,6 +60,25 @@ function Card({ id, title, url, image_url, news_site, summary, published_at, fav
         };
     }
 
+    function reformateDate(dateString) {
+
+        const dateObect = new Date(dateString);
+
+        const dayUTC = dateObect.getUTCDate().toString().padStart(2, '0');
+        const monthUTC = (dateObect.getUTCMonth() + 1).toString().padStart(2, '0');
+        const yearUTC = dateObect.getUTCFullYear();
+        const hourUTC = dateObect.getUTCHours().toString().padStart(2, '0');
+        const minutesUTC = dateObect.getUTCMinutes().toString().padStart(2, '0');
+
+        const reformatedDate = dayUTC + "/" + monthUTC + "/" + yearUTC + " at " + hourUTC + ':' + minutesUTC + " GMT";
+        //console.log(reformatedDate);
+
+
+        return reformatedDate
+
+
+    }
+
 
     return (
 
@@ -77,7 +96,7 @@ function Card({ id, title, url, image_url, news_site, summary, published_at, fav
                 </CardLink>
             </div>
             <div className="card-footer ">
-                {published_at}
+                {reformateDate(published_at)}
             </div>
         </StyledCard>
 
