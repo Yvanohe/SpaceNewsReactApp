@@ -29,7 +29,7 @@ function Home() {
 
 
   if (error[0]) {
-    return (<span>Get an issue : {error[1]}</span>)
+    return (<span>Get an issue during news retrieval</span>)
   }
 
   return (

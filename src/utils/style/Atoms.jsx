@@ -28,7 +28,7 @@ export const StyledLink = styled(Link)`
   padding: 10px 15px;
   color:  #8186a0 ;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 28px;
   text-align: center;
 
 `
