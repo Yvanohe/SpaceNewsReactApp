@@ -1,5 +1,5 @@
 import styled from "styled-components"
-
+import { reformateDate } from "../../utils/tools"
 
 const CardLink = styled.a`
 text-decoration : none;
@@ -46,7 +46,7 @@ color : red;
 
 `
 
-function Card({ id, title, url, image_url, news_site, summary, published_at, fav, setFav, isFavourite }) {
+function NewsCard({ id, title, url, image_url, news_site, summary, published_at, fav, setFav, isFavourite }) {
 
     //Function to add or remove an article id to list of favorite :
     function addOrRemoveToFavorites(id) {
@@ -60,24 +60,21 @@ function Card({ id, title, url, image_url, news_site, summary, published_at, fav
         };
     }
 
-    function reformateDate(dateString) {
+    // function reformateDate(dateString) {
 
-        const dateObect = new Date(dateString);
+    //     const dateObect = new Date(dateString);
 
-        const dayUTC = dateObect.getUTCDate().toString().padStart(2, '0');
-        const monthUTC = (dateObect.getUTCMonth() + 1).toString().padStart(2, '0');
-        const yearUTC = dateObect.getUTCFullYear();
-        const hourUTC = dateObect.getUTCHours().toString().padStart(2, '0');
-        const minutesUTC = dateObect.getUTCMinutes().toString().padStart(2, '0');
+    //     const dayUTC = dateObect.getUTCDate().toString().padStart(2, '0');
+    //     const monthUTC = (dateObect.getUTCMonth() + 1).toString().padStart(2, '0');
+    //     const yearUTC = dateObect.getUTCFullYear();
+    //     const hourUTC = dateObect.getUTCHours().toString().padStart(2, '0');
+    //     const minutesUTC = dateObect.getUTCMinutes().toString().padStart(2, '0');
 
-        const reformatedDate = dayUTC + "/" + monthUTC + "/" + yearUTC + " at " + hourUTC + ':' + minutesUTC + " GMT";
-        //console.log(reformatedDate);
+    //     const reformatedDate = dayUTC + "/" + monthUTC + "/" + yearUTC + " at " + hourUTC + ':' + minutesUTC + " GMT";
 
+    //     return reformatedDate
 
-        return reformatedDate
-
-
-    }
+    // }
 
 
     return (
@@ -99,9 +96,8 @@ function Card({ id, title, url, image_url, news_site, summary, published_at, fav
                 {reformateDate(published_at)}
             </div>
         </StyledCard>
-
     )
 
 }
 
-export default Card
+export default NewsCard

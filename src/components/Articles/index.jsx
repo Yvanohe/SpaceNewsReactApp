@@ -1,4 +1,4 @@
-import Card from "../Card"
+import NewsCard from "../NewsCard"
 import styled from 'styled-components';
 import { useState, useEffect } from 'react'
 
@@ -33,7 +33,7 @@ function Articles({ articlesList, onlyFavourites }) {
         <CardsContainer>
             {filteredArticlesList?.map((article) =>
             (
-                <Card
+                <NewsCard
                     key={article.id}
                     id={article.id}
                     title={article.title}
