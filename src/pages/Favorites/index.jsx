@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { Loader } from "../../utils/style/Atoms";
+import { Loader, PageTitle } from "../../utils/style/Atoms";
 import Articles from "../../components/Articles";
 import styled from 'styled-components';
+import { ThemeContext } from "../../utils/context";
+import { useContext } from 'react'
 
 
 const FavoritesContainer = styled.div`
@@ -10,15 +12,11 @@ flex-direction : column;
 justify-content : center;
 align-items: center;`
 
-const PageTitle = styled.h1`
-  font-size: 30px;
-  text-align: center;
-  padding-top : 30px;
-  padding-bottom: 30px;
-`
 
 function Favorites() {
 
+    //Use Context to get theme (light or dark) :
+    const { theme } = useContext(ThemeContext);
 
     const [isLoading, setLoading] = useState(true);
 
@@ -62,9 +60,10 @@ function Favorites() {
     return (
 
         <FavoritesContainer className="container-xxl">
-            <PageTitle>My favourite news</PageTitle>
+            <PageTitle theme={theme}>My favourite news</PageTitle>
             {isLoading ? (<Loader />) :
-                (<Articles articlesList={articles} onlyFavourites={true} />)
+                (articles.length > 0 ? <Articles articlesList={articles} onlyFavourites={true} /> :
+                    <p>No press article saved as a favourite</p>)
             }
         </FavoritesContainer>
 

@@ -96,15 +96,15 @@ function LaunchCard({ id, name, agenceName, rocketName, url, image_url, missionD
 
     <StyledCard className="card" theme={theme}>
       <CardHeader className="card-header">
-        <CardLink theme={theme} href={url}><h4>{reformateDate(net)}</h4></CardLink>
+        <CardLink theme={theme} href={url} target='_blank'><h4>{reformateDate(net)}</h4></CardLink>
       </CardHeader>
-      <CardLink href={url}><CardImg src={image_url} className="card-img-top" alt={name} /></CardLink>
+      <CardLink href={url} target='_blank'><CardImg src={image_url} className="card-img-top" alt={name} /></CardLink>
       <ul className="list-group list-group-flush ">
         <StyledListItem theme={theme} className="list-group-item "><strong>Agency name</strong> : {agenceName}</StyledListItem>
         <StyledListItem theme={theme} className="list-group-item"><strong>Rocket name</strong> : {rocketName}</StyledListItem>
       </ul>
       <div className="card-body">
-        <CardLink href={url}>
+        <CardLink href={url} target='_blank'>
           <CardTitle className="card-title">{name}</CardTitle>
           <CardSummary className="card-text" >{missionDescription}</CardSummary>
         </CardLink>

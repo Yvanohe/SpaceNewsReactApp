@@ -2,9 +2,10 @@ import ResearchForm from "../../components/ResearchForm";
 import styled from 'styled-components';
 import { useState } from "react";
 import { useFetch } from '../../utils/hooks'
-import { Loader } from '../../utils/style/Atoms';
+import { Loader, PageTitle } from '../../utils/style/Atoms';
 import Articles from "../../components/Articles";
-
+import { ThemeContext } from "../../utils/context";
+import { useContext } from 'react'
 
 const FormContainer = styled.div`
 display : flex;
@@ -15,11 +16,11 @@ margin-bottom : 50px;
 width: 100%;
 `
 
-const SearchTitle = styled.h1`
-text-align: center;
-padding-top: 25px;
-padding-bottom : 25px;
-`
+// const SearchTitle = styled.h1`
+// text-align: center;
+// padding-top: 25px;
+// padding-bottom : 25px;
+// `
 
 const SearchPageContainer = styled.div`
 display : flex;
@@ -30,6 +31,8 @@ align-items : center;
 
 
 function Search() {
+    //Use Context to get theme (light or dark) :
+    const { theme } = useContext(ThemeContext);
     //state to open/close search form : 
     const [isOpen, setIsOpen] = useState(true);
     //url which will be build on form submit :
@@ -52,7 +55,7 @@ function Search() {
 
     return (
         <SearchPageContainer className="container-xxl">
-            <SearchTitle >Search for a news article</SearchTitle >
+            <PageTitle theme={theme} >Search for a news article</PageTitle >
             {isOpen ? (
 
                 <FormContainer>

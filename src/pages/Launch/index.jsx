@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { useFetch } from '../../utils/hooks';
 import LaunchCard from '../../components/LaunchCard';
 import styled from "styled-components"
-import { Loader } from '../../utils/style/Atoms';
+import { Loader, PageTitle } from '../../utils/style/Atoms';
 import rocketDefaultImage from '../../assets/rocket_default_image.png'
+import { ThemeContext } from "../../utils/context";
+import { useContext } from 'react'
 
 const LaunchCardsContainer = styled.div`
 display: flex;
@@ -12,14 +14,11 @@ gap: 24px;
 justify-content : center; 
 align-items: center;
 `
-const PageTitle = styled.h1`
-  font-size: 30px;
-  text-align: center;
-  padding-top : 30px;
-  padding-bottom: 30px;
-`
+
 
 function Launch() {
+    //Use Context to get theme (light or dark) :
+    const { theme } = useContext(ThemeContext);
 
     //Calculate date in a month :
     function dateInAMonth() {
@@ -51,7 +50,7 @@ function Launch() {
 
 
     return (<div>
-        <PageTitle>Upcoming launches this month</PageTitle>
+        <PageTitle theme={theme}>Upcoming launches this month</PageTitle>
         <LaunchCardsContainer className='container-xxl'>
 
             {isLoading ? (<Loader />) :

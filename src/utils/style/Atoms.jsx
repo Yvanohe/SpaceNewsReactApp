@@ -23,6 +23,14 @@ export const Loader = styled.div`
   width: 0;
 `
 
+export const PageTitle = styled.h1`
+  font-size: 30px;
+  text-align: center;
+  padding-top : 30px;
+  padding-bottom: 30px;
+  color : ${(props) => props.theme === 'light' ? 'black' : colors.primary}
+`
+
 
 export const StyledLink = styled(Link)`
   padding: 10px 15px;

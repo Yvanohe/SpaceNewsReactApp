@@ -80,13 +80,13 @@ function NewsCard({ id, title, url, image_url, news_site, summary, published_at,
 
         <StyledCard theme={theme} className="card" >
             <CardHeader className="card-header">
-                <CardLink href={url} theme={theme}><h4 >{news_site}</h4></CardLink>
+                <CardLink href={url} theme={theme} target='_blank'><h4 >{news_site}</h4></CardLink>
                 <CardFavIcone className={isFavourite ? "bi bi-heart-fill" : "bi bi-heart"} onClick={() => addOrRemoveToFavorites(id)}></CardFavIcone>
             </CardHeader>
 
-            <CardLink href={url}><CardImg src={image_url} className="card-img-top" alt={title} /></CardLink>
+            <CardLink href={url} target='_blank'><CardImg src={image_url} className="card-img-top" alt={title} /></CardLink>
             <div className="card-body">
-                <CardLink href={url} theme={theme}>
+                <CardLink href={url} theme={theme} target='_blank' >
                     <CardTitle className="card-title">{title}</CardTitle>
                     <CardSummary className="card-text" theme={theme}>{summary}</CardSummary>
                 </CardLink>

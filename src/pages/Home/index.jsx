@@ -1,16 +1,15 @@
 import Articles from '../../components/Articles';
 import styled from 'styled-components';
 import { useFetch } from '../../utils/hooks'
-import { Loader } from '../../utils/style/Atoms';
+import { Loader, PageTitle } from '../../utils/style/Atoms';
+import { ThemeContext } from "../../utils/context";
+import { useContext } from 'react'
 
 
 
-const PageTitle = styled.h1`
-  font-size: 30px;
-  text-align: center;
-  padding-top : 30px;
-  padding-bottom: 30px;
-`
+
+
+
 
 const HomeContainer = styled.div`
 display : flex;
@@ -21,12 +20,14 @@ align-items: center;
 
 function Home() {
 
+  //Use Context to get theme (light or dark) :
+  const { theme } = useContext(ThemeContext);
+
   //Get articles using custom hook  : 
-  const { data, isLoading, error } = useFetch("https://api.spaceflightnewsapi.net/v4/articles/");
+  const { data, isLoading, error } = useFetch("https://api.spaceflightnewsapi.net/v4/articles/?limit=20");
 
   // list of articles : 
   const articlesList = data?.results;
-
 
   if (error[0]) {
     return (<span>Get an issue during news retrieval</span>)
@@ -34,7 +35,7 @@ function Home() {
 
   return (
     <HomeContainer className='container-xxl'>
-      <PageTitle>Latest news</PageTitle>
+      <PageTitle theme={theme}>Latest news</PageTitle>
       {isLoading ? (<Loader />) :
         (<Articles articlesList={articlesList} onlyFavourites={false} />)
       }
