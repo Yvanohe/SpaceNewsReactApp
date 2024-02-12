@@ -1,19 +1,25 @@
 import styled from "styled-components"
 import { reformateDate } from "../../utils/tools"
+import { useContext } from 'react'
+import { ThemeContext } from "../../utils/context";
+import colors from "../../utils/style/colors";
 
 
 const CardLink = styled.a`
 text-decoration : none;
 color : black;
+color : ${(props) => props.theme === 'light' ? 'black' : colors.primary};
+
 
 `
 
 const StyledCard = styled.div`
 width: 18rem;
 height: 44rem;
-box-shadow: 2px 2px 5px #e2e3e9;
+box-shadow: 2px 2px 5px ${(props) => props.theme === 'light' ? '#e2e3e9' : colors.backgroundDarkSecondary};
+background-color : ${(props) => props.theme === 'light' ? 'white' : colors.backgroundDarkSecondary};
 &:hover {
-    box-shadow: 2px 2px 10px #e2e3e9;
+  box-shadow: 2px 2px 10px ${(props) => props.theme === 'light' ? '#e2e3e9' : colors.backgroundDarkSecondary};
 }
 `
 
@@ -42,6 +48,13 @@ width : 100%;
 height : 250px;
 `
 
+const StyledListItem = styled.li`
+background-color : ${(props) => props.theme === 'light' ? 'white' : colors.backgroundDarkSecondary};
+color : ${(props) => props.theme === 'light' ? 'black' : colors.primary};
+${(props) => props.theme === 'dark' && `
+border-color : #121E28;
+`}
+`
 const CardFooter = styled.div`
 
 color : ${(props) => (props.color)};
@@ -51,10 +64,13 @@ color : ${(props) => (props.color)};
 
 function LaunchCard({ id, name, agenceName, rocketName, url, image_url, missionDescription, net, statusName, statusId }) {
 
+  const { theme } = useContext(ThemeContext);
+
   function getTectColorFromStatus(statusId) {
 
     switch (statusId) {
       case 1:
+
         return 'green'
       case 3:
         return 'green'
@@ -67,22 +83,25 @@ function LaunchCard({ id, name, agenceName, rocketName, url, image_url, missionD
       case 7:
         return 'red'
       default:
-        return 'black'
+        if (theme === 'light') {
+          return 'black'
+        } else {
+          return colors.primary
+        }
+
     }
-
-
   }
 
   return (
 
-    <StyledCard className="card">
+    <StyledCard className="card" theme={theme}>
       <CardHeader className="card-header">
-        <CardLink href={url}><h4>{reformateDate(net)}</h4></CardLink>
+        <CardLink theme={theme} href={url}><h4>{reformateDate(net)}</h4></CardLink>
       </CardHeader>
       <CardLink href={url}><CardImg src={image_url} className="card-img-top" alt={name} /></CardLink>
-      <ul className="list-group list-group-flush">
-        <li className="list-group-item"><strong>Agency name</strong> : {agenceName}</li>
-        <li className="list-group-item"><strong>Rocket name</strong> : {rocketName}</li>
+      <ul className="list-group list-group-flush ">
+        <StyledListItem theme={theme} className="list-group-item "><strong>Agency name</strong> : {agenceName}</StyledListItem>
+        <StyledListItem theme={theme} className="list-group-item"><strong>Rocket name</strong> : {rocketName}</StyledListItem>
       </ul>
       <div className="card-body">
         <CardLink href={url}>

@@ -10,6 +10,12 @@ flex-direction : column;
 justify-content : center;
 align-items: center;`
 
+const PageTitle = styled.h1`
+  font-size: 30px;
+  text-align: center;
+  padding-top : 30px;
+  padding-bottom: 30px;
+`
 
 function Favorites() {
 
@@ -56,6 +62,7 @@ function Favorites() {
     return (
 
         <FavoritesContainer className="container-xxl">
+            <PageTitle>My favourite news</PageTitle>
             {isLoading ? (<Loader />) :
                 (<Articles articlesList={articles} onlyFavourites={true} />)
             }

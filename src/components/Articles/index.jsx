@@ -9,7 +9,7 @@ const CardsContainer = styled.div`
     gap: 24px;
     justify-content : center; 
     align-items: center;
-    
+    margin-bottom : 15px;    
   `
 
 function Articles({ articlesList, onlyFavourites }) {

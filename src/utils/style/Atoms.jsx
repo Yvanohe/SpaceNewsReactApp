@@ -26,9 +26,12 @@ export const Loader = styled.div`
 
 export const StyledLink = styled(Link)`
   padding: 10px 15px;
-  color:  #8186a0 ;
+  color:  ${colors.primary} ;
   text-decoration: none;
   font-size: 28px;
   text-align: center;
+  &:hover{
+    text-shadow: 1px 1px 2px ${colors.primary};
+    }
 
 `

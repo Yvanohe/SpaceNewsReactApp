@@ -1,18 +1,23 @@
 import styled from "styled-components"
 import { reformateDate } from "../../utils/tools"
+import { useContext } from 'react'
+import { ThemeContext } from "../../utils/context";
+import colors from "../../utils/style/colors";
 
 const CardLink = styled.a`
 text-decoration : none;
-color : black;
+color : ${(props) => props.theme === 'light' ? 'black' : colors.primary};
 
 `
 
 const StyledCard = styled.div`
 width: 18rem;
 height: 36rem;
-box-shadow: 2px 2px 5px #e2e3e9;
+box-shadow: 2px 2px 5px ${(props) => props.theme === 'light' ? '#e2e3e9' : colors.backgroundDarkSecondary};
+background-color : ${(props) => props.theme === 'light' ? 'white' : colors.backgroundDarkSecondary};
+
 &:hover {
-    box-shadow: 2px 2px 10px #e2e3e9;
+    box-shadow: 2px 2px 10px ${(props) => props.theme === 'light' ? '#e2e3e9' : colors.backgroundDarkSecondary};
 }
 `
 
@@ -20,9 +25,13 @@ const CardHeader = styled.div`
 display : flex;
 justify-content : space-between;
 `
+const CardFooter = styled.div`
+color : ${(props) => props.theme === 'light' ? 'black' : colors.primary};
 
+`
 //Style to truncate text after 6 lines : 
 const CardSummary = styled.p`
+color : ${(props) => props.theme === 'light' ? 'black' : colors.primary};
 overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 5; 
@@ -42,7 +51,11 @@ width : 100%;
 height : 250px;
 `
 const CardFavIcone = styled.i`
-color : red;
+color : ${colors.primary};
+&:hover {
+    cursor: pointer;
+    font-size : 18px;
+}
 
 `
 
@@ -60,41 +73,27 @@ function NewsCard({ id, title, url, image_url, news_site, summary, published_at,
         };
     }
 
-    // function reformateDate(dateString) {
-
-    //     const dateObect = new Date(dateString);
-
-    //     const dayUTC = dateObect.getUTCDate().toString().padStart(2, '0');
-    //     const monthUTC = (dateObect.getUTCMonth() + 1).toString().padStart(2, '0');
-    //     const yearUTC = dateObect.getUTCFullYear();
-    //     const hourUTC = dateObect.getUTCHours().toString().padStart(2, '0');
-    //     const minutesUTC = dateObect.getUTCMinutes().toString().padStart(2, '0');
-
-    //     const reformatedDate = dayUTC + "/" + monthUTC + "/" + yearUTC + " at " + hourUTC + ':' + minutesUTC + " GMT";
-
-    //     return reformatedDate
-
-    // }
+    const { theme } = useContext(ThemeContext);
 
 
     return (
 
-        <StyledCard className="card">
+        <StyledCard theme={theme} className="card" >
             <CardHeader className="card-header">
-                <CardLink href={url}><h4>{news_site}</h4></CardLink>
+                <CardLink href={url} theme={theme}><h4 >{news_site}</h4></CardLink>
                 <CardFavIcone className={isFavourite ? "bi bi-heart-fill" : "bi bi-heart"} onClick={() => addOrRemoveToFavorites(id)}></CardFavIcone>
             </CardHeader>
 
             <CardLink href={url}><CardImg src={image_url} className="card-img-top" alt={title} /></CardLink>
             <div className="card-body">
-                <CardLink href={url}>
+                <CardLink href={url} theme={theme}>
                     <CardTitle className="card-title">{title}</CardTitle>
-                    <CardSummary className="card-text" >{summary}</CardSummary>
+                    <CardSummary className="card-text" theme={theme}>{summary}</CardSummary>
                 </CardLink>
             </div>
-            <div className="card-footer ">
+            <CardFooter theme={theme} className="card-footer">
                 {reformateDate(published_at)}
-            </div>
+            </CardFooter>
         </StyledCard>
     )
 
