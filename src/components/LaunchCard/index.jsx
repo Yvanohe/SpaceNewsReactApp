@@ -3,6 +3,8 @@ import { reformateDate } from "../../utils/tools"
 import { useContext } from 'react'
 import { ThemeContext } from "../../utils/context";
 import colors from "../../utils/style/colors";
+import PropTypes from 'prop-types'
+
 
 
 const CardLink = styled.a`
@@ -115,9 +117,31 @@ function LaunchCard({ id, name, agenceName, rocketName, url, image_url, missionD
     </StyledCard>
   )
 
+}
 
-
+LaunchCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  rocketName: PropTypes.string,
+  url: PropTypes.string,
+  image_url: PropTypes.string,
+  missionDescription: PropTypes.string,
+  net: PropTypes.string,
+  statusName: PropTypes.string,
+  statusId: PropTypes.number,
 
 }
+
+LaunchCard.defaultProps = {
+  name: "mission name not available",
+  rocketName: "rocket name not available",
+  url: 'https://www.google.fr',
+  image_url: '../../assets/rocket_default_image.png',
+  missionDescription: 'mission description not available',
+  net: '2000-01-01',
+  statusName: 'To Be Determined',
+  statusId: 2,
+}
+
 
 export default LaunchCard

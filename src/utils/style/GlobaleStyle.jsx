@@ -13,11 +13,14 @@ const StyledGlobalStyle = createGlobalStyle`
       text-decoration: none;
     }
 
-    body {
+
+    html, body {
         background-color: ${(props) =>
     props.isDarkMode ? colors.backgroundDark : 'white'};
-        margin-bottom: 100px;
+    min-height:100%; 
+
         color: ${(props) => props.isDarkMode ? 'white' : 'black'};
+
     }
 `
 

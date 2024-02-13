@@ -13,12 +13,11 @@ justify-content : center;
 padding-top: 15px;
 background-color: ${(props) =>
         props.theme === 'light' ? colors.backgroundLightSecondary : colors.backgroundDarkSecondary};
-
-position : fixed ;
+position : fixed;
 bottom:0;
 right : 0;
-left : 0;
-z-index:1030;
+left : 0; 
+ z-index:1030;
 `
 
 const NightModeButton = styled.button`

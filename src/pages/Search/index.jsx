@@ -39,8 +39,6 @@ function Search() {
     const [url, setUrl] = useState("")
     // state to retain input values of the form when it is closed
     const [inputValues, setInputValues] = useState({});
-    console.log(inputValues);
-
 
     //Get articles using custom hook  to fetch : 
     const { data, isLoading, error } = useFetch(url);

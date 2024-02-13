@@ -3,6 +3,7 @@ import { reformateDate } from "../../utils/tools"
 import { useContext } from 'react'
 import { ThemeContext } from "../../utils/context";
 import colors from "../../utils/style/colors";
+import PropTypes from 'prop-types'
 
 const CardLink = styled.a`
 text-decoration : none;
@@ -96,7 +97,29 @@ function NewsCard({ id, title, url, image_url, news_site, summary, published_at,
             </CardFooter>
         </StyledCard>
     )
-
 }
+
+NewsCard.propTypes = {
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string,
+    url: PropTypes.string,
+    image_url: PropTypes.string,
+    news_site: PropTypes.string,
+    summary: PropTypes.string,
+    published_at: PropTypes.string,
+    fav: PropTypes.array.isRequired,
+    setFav: PropTypes.func.isRequired,
+    isFavourite: PropTypes.bool.isRequired
+}
+
+NewsCard.defaultProps = {
+    title: 'title not avaible',
+    url: 'https://www.google.fr',
+    image_url: 'https://stock.adobe.com/fr/search?k=rocket&asset_id=131965318',
+    news_site: 'News web site not avaible',
+    summary: 'news summary not available',
+    published_at: '2000-01-01',
+}
+
 
 export default NewsCard

@@ -20,29 +20,34 @@ function Launch() {
     //Use Context to get theme (light or dark) :
     const { theme } = useContext(ThemeContext);
 
-    //Calculate date in a month :
-    function dateInAMonth() {
-        const date = new Date(); //today date at this point
-        date.setMonth(date.getMonth() + 1);
-        return date;
-    }
+
 
     const [url, setUrl] = useState("");
-    useEffect(() => {
-        // DEV URL : 
-        setUrl("https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=30&net__lte=" + dateInAMonth().toISOString())
+    useEffect((url) => {
+        //Calculate date in a month :
+        function dateInAMonth() {
+            const date = new Date(); //today date at this point
+            date.setMonth(date.getMonth() + 1);
+            return date;
+        }
+        //check number of request left on the LL2 API. If > limit -2 use ll2Dev (which have less data but not rate limits)
+        fetch('https://ll.thespacedevs.com/2.2.0/api-throttle/')
+            .then((response) => response.json())
+            //.then((data) => console.log(data.current_use))
+            .then((data) => (data.current_use >= data.your_request_limit) ? setUrl("https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=30&net__lte=" + dateInAMonth().toISOString()) : setUrl("https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=30&net__lte=" + dateInAMonth().toISOString()))
+            .catch((error) => console.log(error))
 
+        // DEV URL : 
+        //"https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=30&net__lte=" + dateInAMonth().toISOString()
         //PROD URL :
-        //setUrl("https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=30&net__lte=" + dateInAMonth().toISOString())
+        //"https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=30&net__lte=" + dateInAMonth().toISOString()      
     }, []);
-    console.log(url);
+
     //Get futures launches from Launch Library 2 :    
     const { data, isLoading, error } = useFetch(url);
 
-
     // list of launches : 
     const launchesList = data?.results;
-    console.log(launchesList);
 
     if (error[0]) {
         return (<span>Get an issue during launches retrieval</span>)
