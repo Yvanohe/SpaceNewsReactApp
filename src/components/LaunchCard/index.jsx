@@ -72,18 +72,14 @@ function LaunchCard({ id, name, agenceName, rocketName, url, image_url, missionD
 
     switch (statusId) {
       case 1:
-
-        return 'green'
       case 3:
+      case 6:
         return 'green'
       case 4:
+      case 7:
         return 'red'
       case 5:
         return 'orange'
-      case 6:
-        return 'green'
-      case 7:
-        return 'red'
       default:
         if (theme === 'light') {
           return 'black'

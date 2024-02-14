@@ -11,6 +11,7 @@ flex-direction : column;
 align-items : center;
 justify-content : center;
 padding-top: 15px;
+margin-top : 300px;
 background-color: ${(props) =>
         props.theme === 'light' ? colors.backgroundLightSecondary : colors.backgroundDarkSecondary};
 position : fixed;

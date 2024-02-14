@@ -14,10 +14,10 @@ const StyledGlobalStyle = createGlobalStyle`
     }
 
 
-    html, body {
+    body {
         background-color: ${(props) =>
     props.isDarkMode ? colors.backgroundDark : 'white'};
-    min-height:100%; 
+
 
         color: ${(props) => props.isDarkMode ? 'white' : 'black'};
 

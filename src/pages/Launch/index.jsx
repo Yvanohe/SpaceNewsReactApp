@@ -13,6 +13,8 @@ flex-wrap : wrap;
 gap: 24px;
 justify-content : center; 
 align-items: center;
+margin-bottom : 100px;
+
 `
 
 
