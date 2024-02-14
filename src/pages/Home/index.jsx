@@ -33,7 +33,7 @@ function Home() {
   // list of articles : 
   const articlesList = data?.results;
 
-  function addMoreArticles() {
+  function displayMoreArticles() {
     //No more than 50 articles to display
     if (numberOfArticlesToDisplay < 50) {
       setNumberOfArticles(numberOfArticlesToDisplay + 10);
@@ -56,7 +56,7 @@ function Home() {
       {numberOfArticlesToDisplay >= 50 ?
         <MoreNewsButton $isloading={isLoading} className="btn btn-outline-secondary">max number of news article reached</MoreNewsButton>
         :
-        <MoreNewsButton $isloading={isLoading} className="btn btn-outline-secondary" onClick={addMoreArticles}>More news</MoreNewsButton>
+        <MoreNewsButton $isloading={isLoading} className="btn btn-outline-secondary" onClick={displayMoreArticles}>More news</MoreNewsButton>
       }
     </HomeContainer>
   );

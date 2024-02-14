@@ -28,7 +28,7 @@ export const PageTitle = styled.h1`
   text-align: center;
   padding-top : 30px;
   padding-bottom: 30px;
-  color : ${(props) => props.theme === 'light' ? 'black' : colors.primary}
+  color : ${(props) => props.theme === 'light' ? 'black' : colors.primary};
 `
 
 

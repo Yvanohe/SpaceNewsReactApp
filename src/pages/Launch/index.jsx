@@ -1,87 +1,178 @@
-import { useEffect, useState } from 'react';
-import { useFetch } from '../../utils/hooks';
-import LaunchCard from '../../components/LaunchCard';
-import styled from "styled-components"
-import { Loader, PageTitle } from '../../utils/style/Atoms';
-import rocketDefaultImage from '../../assets/rocket_default_image.png'
-import { ThemeContext } from "../../utils/context";
-import { useContext } from 'react'
-
-const LaunchCardsContainer = styled.div`
-display: flex;
-flex-wrap : wrap;
-gap: 24px;
-justify-content : center; 
-align-items: center;
-margin-bottom : 100px;
-
-`
-
+import { useParams } from "react-router-dom"
+import { useFetch } from "../../utils/hooks";
 
 function Launch() {
-    //Use Context to get theme (light or dark) :
-    const { theme } = useContext(ThemeContext);
+
+    const { launchId } = useParams();
+
+    //Get launch detail from Launch Library 2 :    
+    const { data, isLoading, error } = useFetch("https://lldev.thespacedevs.com/2.2.0/launch/" + launchId);
+
+    console.log(data);
+    //     //launch title 
+    //     data.name;
+
+    //Launch details---------
+    //     //laucnh status :
+    //     data.status.id;
+    //     data.status.name;
+    //     //si fail :
+    //     data.failreason
+    //     //last updated:
+    //     data.last_updated;
+
+    //     //net:
+    //     data.net;
+    //     //windows start :
+    //     data.window_start;
+    //     //windows_end:
+    //     data.windowd_end;
+    //     //probability :
+    //     data.probability;
+    //     //webcast live ? :
+    //     data.webcast_live;
+
+    //-----------------------
+
+    // Mission details -----
+    //     //mission name :
+    //     data.mission.name;
+    //     //mission patch :
+    //     data.mission_patches[i].image_url;
+    //     //mission description :
+    //     data.mission.description;
+    //     //mission type:
+    //     data.mission.type;
+    //     //mission orbite :
+    //     data.mission.orbit.name;
+    //-----------
+
+    // //provider details----------:
+    // provider name :
+    //     data.launch_service_provider.name;
+    //     //type lancement :
+    //     data.launch_service_provider.type;
+    //     //pays :
+    //     data.launch_service_provider.country_code;
+    //     //nation image :
+    //     data.launch_service_provider.nation_url;
+    //     //lancements réussi :
+    //     data.launch_service_provider.successful_launches;
+    //     //lancement raté :
+    //     data.launch_service_provider.failed_launches;
+    //     //url :
+    //     data.launch_service_provider.info_url;
+    //     //logo
+    //     data.launch_service_provider.logo_url;
+    //---------------------------------------
+
+    //rocket detail---------------------------
+    // //rocket name :
+    //     data.rocket.configuration.full_name;
+    //     //reutilisable 
+    //     data.rocket.configuration.reusable;
+    //     //Si oui rocket flight proven ?
+    //     data.rocket.launcher_stage.launcher.flight_proven;
+    //     //si oui, number of flight :
+    //     data.rocket.launcher_stage.launcher.flights;
+    //     //rocket image :
+    //     data.rocket.image_url
+    //     //rocket serial number :
+    //     data.rocket.launcher_stage.launcher.serial_number;
+    //     //landing ?
+    //     data.rocket.launcher_stage.landing.attempt;
+    //     data.rocket.launcher_stage.landing.description;
+    //     //success landing ?
+    //     data.rocket.launcher_stage.landing.success;
+    //---------------------------------------------
+
+    //pad detail-----------------------------
+    //     //pad:
+    //     data.pad.name;
+    //     //pad wiki:
+    //     data.pad.wiki_url;
+    //     // pad location;
+    //     data.pad.latitude;
+    //     data.pad.longitude;
+    //     data.pad.location.name;
+    //------------------------------------
 
 
 
-    const [url, setUrl] = useState("");
-    useEffect((url) => {
-        //Calculate date in a month :
-        function dateInAMonth() {
-            const date = new Date(); //today date at this point
-            date.setMonth(date.getMonth() + 1);
-            return date;
-        }
-        //check number of request left on the LL2 API. If > limit -2 use ll2Dev (which have less data but not rate limits)
-        fetch('https://ll.thespacedevs.com/2.2.0/api-throttle/')
-            .then((response) => response.json())
-            //.then((data) => console.log(data.current_use))
-            .then((data) => (data.current_use >= data.your_request_limit) ? setUrl("https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=30&net__lte=" + dateInAMonth().toISOString()) : setUrl("https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=30&net__lte=" + dateInAMonth().toISOString()))
-            .catch((error) => console.log(error))
-
-        // DEV URL : 
-        //"https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=30&net__lte=" + dateInAMonth().toISOString()
-        //PROD URL :
-        //"https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=30&net__lte=" + dateInAMonth().toISOString()      
-    }, []);
-
-    //Get futures launches from Launch Library 2 :    
-    const { data, isLoading, error } = useFetch(url);
-
-    // list of launches : 
-    const launchesList = data?.results;
-
-    if (error[0]) {
-        return (<span>Get an issue during launches retrieval</span>)
-    }
 
 
-    return (<div>
-        <PageTitle theme={theme}>Upcoming launches this month</PageTitle>
-        <LaunchCardsContainer className='container-xxl'>
 
-            {isLoading ? (<Loader />) :
-                (launchesList?.map((launch) => (
+    return (
+        <div className="container-xxl">
+            <div class="accordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                            Launch status
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
+                    </div>
+                </div>
 
-                    <LaunchCard
-                        key={launch.id}
-                        id={launch.id}
-                        name={launch.name}
-                        agenceName={launch.mission.agencies[0]?.name ?? "Unknown"}
-                        rocketName={launch.rocket.configuration.full_name ?? "Unknown"}
-                        url={launch.mission.agencies[0]?.info_url ?? "/"}
-                        image_url={launch.image !== null ? launch.image : rocketDefaultImage}
-                        missionDescription={launch.mission.description}
-                        net={launch.net}
-                        statusName={launch.status.name}
-                        statusId={launch.status.id}
-                    />)
-                ))
-            }
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                            Mission details
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <p>{data.mission.description}</p>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                            Launch provider
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
+                    </div>
+                </div>
 
-        </LaunchCardsContainer>
-    </div>)
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                            Rocket
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                            Pad
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+
 }
 
 export default Launch

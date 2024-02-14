@@ -31,10 +31,10 @@ background-color : ${(props) => props.theme === 'light' ? colors.backgroundLight
 
 `
 function Header() {
-
+    //Use Context to get theme (light or dark) :
     const { theme } = useContext(ThemeContext);
 
-
+    //using bootstrap nav bar :
     return (
         <HeaderContainer >
             <NavBar className='navbar navbar-expand-md' theme={theme}>
@@ -45,10 +45,9 @@ function Header() {
                     </button>
                     <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                         <ul className="navbar-nav">
-                            <li className="nav-item active"><StyledLink to="/">Home</StyledLink></li>
-
+                            <li className="nav-item active"><StyledLink to="/">Latest news</StyledLink></li>
                             <li className="nav-item"><StyledLink to="/search">Search a news</StyledLink></li>
-                            <li className="nav-item"><StyledLink to="/launch">Futures launches</StyledLink></li>
+                            <li className="nav-item"><StyledLink to="/launches">Futures launches</StyledLink></li>
                             <li className="nav-item"><StyledLink to="/favorites">My favorites</StyledLink></li>
                         </ul>
                     </div>

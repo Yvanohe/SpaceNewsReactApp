@@ -16,12 +16,6 @@ margin-bottom : 50px;
 width: 100%;
 `
 
-// const SearchTitle = styled.h1`
-// text-align: center;
-// padding-top: 25px;
-// padding-bottom : 25px;
-// `
-
 const SearchPageContainer = styled.div`
 display : flex;
 flex-direction : column;
@@ -44,8 +38,6 @@ function Search() {
 
     //Get articles using custom hook  to fetch : 
     const { data, isLoading, error } = useFetch(url);
-
-
     // list of articles : 
     const articlesList = data?.results;
 

@@ -69,7 +69,6 @@ function LaunchCard({ id, name, agenceName, rocketName, url, image_url, missionD
   const { theme } = useContext(ThemeContext);
 
   function getTectColorFromStatus(statusId) {
-
     switch (statusId) {
       case 1:
       case 3:
@@ -86,7 +85,6 @@ function LaunchCard({ id, name, agenceName, rocketName, url, image_url, missionD
         } else {
           return colors.primary
         }
-
     }
   }
 
@@ -96,13 +94,13 @@ function LaunchCard({ id, name, agenceName, rocketName, url, image_url, missionD
       <CardHeader className="card-header">
         <CardLink theme={theme} href={url} target='_blank'><h4>{reformateDate(net)}</h4></CardLink>
       </CardHeader>
-      <CardLink href={url} target='_blank'><CardImg src={image_url} className="card-img-top" alt={name} /></CardLink>
+      <CardLink href={"/launch/" + id} target='_blank'><CardImg src={image_url} className="card-img-top" alt={name} /></CardLink>
       <ul className="list-group list-group-flush ">
         <StyledListItem theme={theme} className="list-group-item "><strong>Agency name</strong> : {agenceName}</StyledListItem>
         <StyledListItem theme={theme} className="list-group-item"><strong>Rocket name</strong> : {rocketName}</StyledListItem>
       </ul>
       <div className="card-body">
-        <CardLink href={url} target='_blank'>
+        <CardLink href={url} theme={theme} target='_blank'>
           <CardTitle className="card-title">{name}</CardTitle>
           <CardSummary className="card-text" >{missionDescription}</CardSummary>
         </CardLink>

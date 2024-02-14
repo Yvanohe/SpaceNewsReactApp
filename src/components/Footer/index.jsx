@@ -11,7 +11,6 @@ flex-direction : column;
 align-items : center;
 justify-content : center;
 padding-top: 15px;
-margin-top : 300px;
 background-color: ${(props) =>
         props.theme === 'light' ? colors.backgroundLightSecondary : colors.backgroundDarkSecondary};
 position : fixed;
@@ -37,7 +36,7 @@ function Footer() {
         <div  >
             <FooterContainer theme={theme}>
                 <NightModeButton onClick={() => toggleTheme()}>{theme === 'light' ? '☀️ Change to night mode ' : '🌙 Change to light mode '} </NightModeButton>
-                <p>Yvan Lubac - Thanks to <a href="Spaceflight News API" target='_blank'>Spaceflight News API</a></p>
+                <p>Yvan Lubac - Thanks to <a href="https://api.spaceflightnewsapi.net/v4/docs/" target='_blank'>Spaceflight News API</a></p>
             </FooterContainer>
         </div >
 
