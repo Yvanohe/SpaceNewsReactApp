@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
 import colors from './colors'
 
@@ -31,15 +30,7 @@ export const PageTitle = styled.h1`
   color : ${(props) => props.theme === 'light' ? 'black' : colors.primary};
 `
 
-
-export const StyledLink = styled(Link)`
-  padding: 10px 15px;
-  color:  ${colors.primary} ;
-  text-decoration: none;
-  font-size: 28px;
-  text-align: center;
-  &:hover{
-    text-shadow: 1px 1px 2px ${colors.primary};
-    }
-
+export const StyledAnchor = styled.a`
+text-decoration : none;
+color : ${(props) => props.theme === 'light' ? 'black' : colors.primary};
 `

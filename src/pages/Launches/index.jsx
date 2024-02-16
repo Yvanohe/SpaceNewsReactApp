@@ -6,6 +6,7 @@ import { Loader, PageTitle } from '../../utils/style/Atoms';
 import rocketDefaultImage from '../../assets/rocket_default_image.png'
 import { ThemeContext } from "../../utils/context";
 import { useContext } from 'react'
+import apisURLs from '../../config/api_URLs';
 
 const LaunchCardsContainer = styled.div`
 display: flex;
@@ -25,7 +26,7 @@ function Launches() {
     const [url, setUrl] = useState("");
 
     // At first render, checking if we can use PROD API or DEV :
-    useEffect((url) => {
+    useEffect(() => {
         //function to calculate date in a month from today :
         function dateInAMonth() {
             const date = new Date(); //today date at this point
@@ -33,15 +34,11 @@ function Launches() {
             return date;
         }
         //check number of request left on the LL2 API. If > limit -2 use ll2Dev (which have less data but not rate limits)
-        fetch('https://ll.thespacedevs.com/2.2.0/api-throttle/')
+        fetch(apisURLs.throttleURL)
             .then((response) => response.json())
             //.then((data) => console.log(data.current_use))
-            .then((data) => (data.current_use >= data.your_request_limit) ? setUrl("https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=30&net__lte=" + dateInAMonth().toISOString()) : setUrl("https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=30&net__lte=" + dateInAMonth().toISOString()))
-            .catch(setUrl("https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=30&net__lte=" + dateInAMonth().toISOString()))
-        // DEV URL : 
-        //"https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?limit=30&net__lte=" + dateInAMonth().toISOString()
-        //PROD URL :
-        //"https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=30&net__lte=" + dateInAMonth().toISOString()      
+            .then((data) => (data.current_use >= data.your_request_limit) ? setUrl(apisURLs.upcomingLaunchesURL_DEV + "?limit=30&net__lte=" + dateInAMonth().toISOString()) : setUrl(apisURLs.upcomingLaunchesURL + "?limit=30&net__lte=" + dateInAMonth().toISOString()))
+            .catch(() => setUrl(apisURLs.upcomingLaunchesURL_DEV + "?limit=30&net__lte=" + dateInAMonth().toISOString()))
     }, []);
 
 

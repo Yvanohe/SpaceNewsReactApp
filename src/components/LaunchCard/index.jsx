@@ -1,20 +1,15 @@
 import styled from "styled-components"
 import { reformateDate } from "../../utils/tools"
 import { useContext } from 'react'
+import { Link } from "react-router-dom"
 import { ThemeContext } from "../../utils/context";
 import colors from "../../utils/style/colors";
 import PropTypes from 'prop-types'
+import { StyledAnchor } from "../../utils/style/Atoms";
 
 
 
-const CardLink = styled.a`
-text-decoration : none;
-color : black;
-color : ${(props) => props.theme === 'light' ? 'black' : colors.primary};
-
-
-`
-
+//Styled Components---------------------------------------
 const StyledCard = styled.div`
 width: 18rem;
 height: 44rem;
@@ -50,6 +45,11 @@ width : 100%;
 height : 250px;
 `
 
+const StyledLink = styled(Link)`
+text-decoration : none;
+color : ${(props) => props.theme === 'light' ? 'black' : colors.primary};
+`
+
 const StyledListItem = styled.li`
 background-color : ${(props) => props.theme === 'light' ? 'white' : colors.backgroundDarkSecondary};
 color : ${(props) => props.theme === 'light' ? 'black' : colors.primary};
@@ -58,17 +58,15 @@ border-color : #121E28;
 `}
 `
 const CardFooter = styled.div`
-
 color : ${(props) => (props.color)};
 `
-
-
+//------------------------------------------------------------------------
 
 function LaunchCard({ id, name, agenceName, rocketName, url, image_url, missionDescription, net, statusName, statusId }) {
 
   const { theme } = useContext(ThemeContext);
 
-  function getTectColorFromStatus(statusId) {
+  const getTextColorFromStatus = function (statusId) {
     switch (statusId) {
       case 1:
       case 3:
@@ -92,25 +90,24 @@ function LaunchCard({ id, name, agenceName, rocketName, url, image_url, missionD
 
     <StyledCard className="card" theme={theme}>
       <CardHeader className="card-header">
-        <CardLink theme={theme} href={url} target='_blank'><h4>{reformateDate(net)}</h4></CardLink>
+        <StyledAnchor theme={theme} href={"/launch/" + id} data-toggle="tooltip" data-placement="top" title="See launch details"><h4>{reformateDate(net)}</h4></StyledAnchor>
       </CardHeader>
-      <CardLink href={"/launch/" + id} target='_blank'><CardImg src={image_url} className="card-img-top" alt={name} /></CardLink>
+      <StyledLink to={"/launch/" + id} data-toggle="tooltip" data-placement="top" title="See launch details"><CardImg src={image_url} className="card-img-top" alt={name} /></StyledLink>
       <ul className="list-group list-group-flush ">
-        <StyledListItem theme={theme} className="list-group-item "><strong>Agency name</strong> : {agenceName}</StyledListItem>
+        <StyledListItem theme={theme} className="list-group-item "><StyledAnchor href={url} theme={theme} target='_blank' data-toggle="tooltip" data-placement="top" title="See agency website"><strong>Agency name</strong> : {agenceName}</StyledAnchor></StyledListItem>
         <StyledListItem theme={theme} className="list-group-item"><strong>Rocket name</strong> : {rocketName}</StyledListItem>
       </ul>
       <div className="card-body">
-        <CardLink href={url} theme={theme} target='_blank'>
+        <StyledLink to={"/launch/" + id} theme={theme} data-toggle="tooltip" data-placement="top" title="See launch details">
           <CardTitle className="card-title">{name}</CardTitle>
           <CardSummary className="card-text" >{missionDescription}</CardSummary>
-        </CardLink>
+        </StyledLink>
       </div>
-      <CardFooter className="card-footer" color={getTectColorFromStatus(statusId)}>
+      <CardFooter className="card-footer" color={getTextColorFromStatus(statusId)}>
         <strong>{statusName}</strong>
       </CardFooter>
     </StyledCard>
   )
-
 }
 
 LaunchCard.propTypes = {

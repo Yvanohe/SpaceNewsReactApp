@@ -1,9 +1,11 @@
+import apisURLs from '../../config/api_URLs';
+
 function ResearchForm({ setUrl, inputValues, setInputValues }) {
 
     function buildUrlonSubmit(e) {
 
         e.preventDefault();
-        var urltoBuild = "https://api.spaceflightnewsapi.net/v4/articles/";
+        var urltoBuild = apisURLs.newsUrl;
 
         //interate all input of form (excep last one which is submit button)
         for (let i = 0; i < e.target.length - 1; i++) {
@@ -84,12 +86,7 @@ function ResearchForm({ setUrl, inputValues, setInputValues }) {
                 </div>
             </div>
         </form>
-
-
-
     )
-
-
 
 }
 

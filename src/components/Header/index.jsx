@@ -1,14 +1,23 @@
 import { Link } from "react-router-dom";
 import logo from '../../assets/logo.png'
 import styled from "styled-components";
-import { StyledLink } from '../../utils/style/Atoms'
 import { useContext } from 'react'
 import { ThemeContext } from "../../utils/context";
 import colors from '../../utils/style/colors'
 
 
 
+const StyledLink = styled(Link)`
+  padding: 10px 15px;
+  color:  ${colors.primary} ;
+  text-decoration: none;
+  font-size: 28px;
+  text-align: center;
+  &:hover{
+    text-shadow: 1px 1px 2px ${colors.primary};
+    }
 
+`
 
 //styled component for logo :
 const LogoImg = styled.img`

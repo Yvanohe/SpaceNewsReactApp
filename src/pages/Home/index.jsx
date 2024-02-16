@@ -4,6 +4,7 @@ import { useFetch } from '../../utils/hooks'
 import { Loader, PageTitle } from '../../utils/style/Atoms';
 import { ThemeContext } from "../../utils/context";
 import { useContext, useState } from 'react'
+import apisURLs from '../../config/api_URLs';
 
 
 const HomeContainer = styled.div`
@@ -29,7 +30,7 @@ function Home() {
   const [numberOfArticlesToDisplay, setNumberOfArticles] = useState(20);
 
   //Get articles using custom hook  : 
-  const { data, isLoading, error } = useFetch("https://api.spaceflightnewsapi.net/v4/articles/?limit=" + numberOfArticlesToDisplay.toString());
+  const { data, isLoading, error } = useFetch(apisURLs.newsUrl + "?limit=" + numberOfArticlesToDisplay.toString());
   // list of articles : 
   const articlesList = data?.results;
 

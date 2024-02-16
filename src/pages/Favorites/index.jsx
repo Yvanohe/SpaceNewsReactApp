@@ -4,6 +4,7 @@ import Articles from "../../components/Articles";
 import styled from 'styled-components';
 import { ThemeContext } from "../../utils/context";
 import { useContext } from 'react'
+import apisURLs from "../../config/api_URLs";
 
 
 const FavoritesContainer = styled.div`
@@ -48,7 +49,7 @@ function Favorites() {
         var urls = [];
 
         for (let id of favourites) {
-            let url = "https://api.spaceflightnewsapi.net/v4/articles/" + id;
+            let url = apisURLs.newsUrl + id;
             urls.push(url);
         }
         //fetch data for each article :

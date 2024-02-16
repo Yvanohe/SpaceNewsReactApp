@@ -4,12 +4,9 @@ import { useContext } from 'react'
 import { ThemeContext } from "../../utils/context";
 import colors from "../../utils/style/colors";
 import PropTypes from 'prop-types'
+import { StyledAnchor } from "../../utils/style/Atoms";
 
-const CardLink = styled.a`
-text-decoration : none;
-color : ${(props) => props.theme === 'light' ? 'black' : colors.primary};
 
-`
 
 const StyledCard = styled.div`
 width: 18rem;
@@ -81,16 +78,16 @@ function NewsCard({ id, title, url, image_url, news_site, summary, published_at,
 
         <StyledCard theme={theme} className="card" >
             <CardHeader className="card-header">
-                <CardLink href={url} theme={theme} target='_blank'><h4 >{news_site}</h4></CardLink>
+                <StyledAnchor href={url} theme={theme} target='_blank'><h4 >{news_site}</h4></StyledAnchor>
                 <CardFavIcone className={isFavourite ? "bi bi-heart-fill" : "bi bi-heart"} onClick={() => addOrRemoveToFavorites(id)}></CardFavIcone>
             </CardHeader>
 
-            <CardLink href={url} target='_blank'><CardImg src={image_url} className="card-img-top" alt={title} /></CardLink>
+            <StyledAnchor href={url} target='_blank'><CardImg src={image_url} className="card-img-top" alt={title} /></StyledAnchor>
             <div className="card-body">
-                <CardLink href={url} theme={theme} target='_blank' >
+                <StyledAnchor href={url} theme={theme} target='_blank' >
                     <CardTitle className="card-title">{title}</CardTitle>
                     <CardSummary className="card-text" theme={theme}>{summary}</CardSummary>
-                </CardLink>
+                </StyledAnchor>
             </div>
             <CardFooter theme={theme} className="card-footer">
                 {reformateDate(published_at)}
