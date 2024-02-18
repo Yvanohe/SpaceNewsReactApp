@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 
 export function useFetch(url) {
-    const [data, setData] = useState({})
-    const [isLoading, setLoading] = useState(true)
-    const [error, setError] = useState([false, "no error"])
+    const [data, setData] = useState({});
+    const [isLoading, setLoading] = useState(false);
+    const [error, setError] = useState([false, "no error"]);
 
     useEffect(() => {
         if (!url) return

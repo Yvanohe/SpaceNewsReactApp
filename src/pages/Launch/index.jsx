@@ -16,7 +16,6 @@ import colors from "../../utils/style/colors";
 
 
 
-
 //Styled components-----------------------------------
 
 const LaunchPageContainer = styled.div`
@@ -148,11 +147,15 @@ function Launch() {
     // useEffect(() => {
 
     //     if (mapRef.current) {
-    //         console.log(mapRef.current)
-    //         mapRef.current.invalidateSize();
+    //         window.dispatchEvent(new Event('resize'));
 
     //     }
     // });
+
+    useEffect(() => {
+        // Simulate window resize
+        window.dispatchEvent(new Event('resize'));
+    }, []); // Empty array means this runs once after the initial render
 
     if (error[0]) {
         return (<span>Get an issue during launch retrieval.</span>)
@@ -367,7 +370,6 @@ function Launch() {
                     {/* </div> */}
                 </AccordionContainer>)
             }
-
 
         </LaunchPageContainer>
     )
