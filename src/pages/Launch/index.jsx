@@ -103,6 +103,8 @@ function Launch() {
 
     // url subject to change 
     const [url, setUrl] = useState("");
+    //To track when the api (dev or prod) has been determined (with the throttleURL)
+    const [isUrlLoading, setUrlLoading] = useState(true);
 
     const [istoggleChecked, setToggleStatus] = useState(false);
     function handleToggleChange() {
@@ -116,6 +118,9 @@ function Launch() {
             .then((data) => (
                 data.current_use >= data.your_request_limit) ? setUrl(apisURLs.launcheURL_DEV + launchId) : setUrl(apisURLs.launcheURL + launchId))
             .catch(() => setUrl(apisURLs.launcheURL_DEV + launchId))
+            .finally(() => setUrlLoading(false))
+
+
 
     }, [launchId]);
 
@@ -166,7 +171,7 @@ function Launch() {
             <PageTitle theme={theme}>{data.name ?? ""}</PageTitle>
 
 
-            {(isLoading) ? (<Loader />) :
+            {(isLoading || isUrlLoading) ? (<Loader />) :
 
                 (<AccordionContainer>
                     <FormSwitch theme={theme} className="form-check form-switch">
