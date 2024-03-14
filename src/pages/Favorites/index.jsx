@@ -54,7 +54,7 @@ function Favorites() {
         }
         //fetch data for each article :
         if (urls) {
-            setLoading(true)
+            setLoading(true);
             fetchData(urls);
         }
 

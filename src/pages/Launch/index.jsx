@@ -354,7 +354,7 @@ function Launch() {
                                                 </StyledAnchor>
                                             </div>
                                         </li>
-                                        <li className="list-group-item">
+                                        <li className="list-group-item" title="Resize web browser window to correct the display bug">
                                             <h3>Location</h3>
                                             <p> Location name : {data.pad?.location?.name ?? "Unknown"}</p>
                                             <StyledMapContainer center={[Number(data.pad?.latitude ?? "0"), Number(data.pad?.longitude ?? "0")]} zoom={8} scrollWheelZoom={true} >

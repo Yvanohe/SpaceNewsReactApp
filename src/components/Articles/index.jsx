@@ -13,7 +13,6 @@ const CardsContainer = styled.div`
   `
 
 function Articles({ articlesList, onlyFavourites }) {
-    // console.log(articlesList);
     //retrieve favourites articles from local storage :
     const favourites = localStorage.getItem('fav')
     //use state to re-render if changes :
@@ -23,7 +22,6 @@ function Articles({ articlesList, onlyFavourites }) {
 
     //if onlyFavourites : filter ArticlesList with ids in fav
     var filteredArticlesList = articlesList;
-    // console.log("heeeho :", filteredArticlesList);
 
     if (onlyFavourites) {
         filteredArticlesList = articlesList.filter((article) => fav.includes(article.id))
