@@ -17,6 +17,11 @@ background-color : ${(props) => props.theme === 'light' ? 'white' : colors.backg
 &:hover {
     box-shadow: 2px 2px 10px ${(props) => props.theme === 'light' ? '#e2e3e9' : colors.backgroundDarkSecondary};
 }
+
+@media (max-width:768px) {
+    height: 14rem;
+}
+
 `
 
 const CardHeader = styled.div`
@@ -35,18 +40,25 @@ overflow: hidden;
   -webkit-line-clamp: 5; 
   -webkit-box-orient: vertical;
   
+  @media (max-width:768px) {
+    display:none;
+}
+
 `
 const CardTitle = styled.h5`
 overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3; 
   -webkit-box-orient: vertical;
-  
+
+
 `
 
 const CardImg = styled.img`
 width : 100%;
 height : 250px;
+
+
 `
 const CardFavIcone = styled.i`
 color : ${colors.primary};
@@ -54,6 +66,8 @@ color : ${colors.primary};
     cursor: pointer;
     font-size : 18px;
 }
+
+
 
 `
 
@@ -82,7 +96,7 @@ function NewsCard({ id, title, url, image_url, news_site, summary, published_at,
                 <CardFavIcone className={isFavourite ? "bi bi-heart-fill" : "bi bi-heart"} onClick={() => addOrRemoveToFavorites(id)}></CardFavIcone>
             </CardHeader>
 
-            <StyledAnchor href={url} target='_blank'><CardImg src={image_url} className="card-img-top" alt={title} /></StyledAnchor>
+            <div className="d-none d-md-block"><StyledAnchor href={url} target='_blank'><CardImg src={image_url} className="card-img-top" alt={title} /></StyledAnchor></div>
             <div className="card-body">
                 <StyledAnchor href={url} theme={theme} target='_blank' >
                     <CardTitle className="card-title">{title}</CardTitle>

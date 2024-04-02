@@ -10,7 +10,7 @@ gap:5px;
 flex-direction : column;
 align-items : center;
 justify-content : center;
-padding-top: 15px;
+padding-top: 10px;
 background-color: ${(props) =>
         props.theme === 'light' ? colors.backgroundLightSecondary : colors.backgroundDarkSecondary};
 color : ${(props) => props.theme === 'light' ? 'black' : colors.primary};

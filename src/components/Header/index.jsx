@@ -21,8 +21,8 @@ const StyledLink = styled(Link)`
 
 //styled component for logo :
 const LogoImg = styled.img`
-width : 120px;
-height : 120px;
+width : 100px;
+height : 100px;
 `
 
 const HeaderContainer = styled.header`

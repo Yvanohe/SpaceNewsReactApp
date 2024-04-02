@@ -18,6 +18,11 @@ background-color : ${(props) => props.theme === 'light' ? 'white' : colors.backg
 &:hover {
   box-shadow: 2px 2px 10px ${(props) => props.theme === 'light' ? '#e2e3e9' : colors.backgroundDarkSecondary};
 }
+
+@media (max-width:768px) {
+    height: 20rem;
+}
+
 `
 
 const CardHeader = styled.div`
@@ -31,6 +36,10 @@ overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 5; 
   -webkit-box-orient: vertical;
+
+  @media (max-width:768px) {
+    display:none;
+}
   
 `
 const CardTitle = styled.h5`
@@ -92,7 +101,7 @@ function LaunchCard({ id, name, agenceName, rocketName, url, image_url, missionD
       <CardHeader className="card-header">
         <StyledAnchor theme={theme} href={"/launch/" + id} data-toggle="tooltip" data-placement="top" title="See launch details"><h4>{reformateDate(net)}</h4></StyledAnchor>
       </CardHeader>
-      <StyledLink to={"/launch/" + id} data-toggle="tooltip" data-placement="top" title="See launch details"><CardImg src={image_url} className="card-img-top" alt={name} /></StyledLink>
+      <div className="d-none d-md-block"><StyledLink to={"/launch/" + id} data-toggle="tooltip" data-placement="top" title="See launch details"><CardImg src={image_url} className="card-img-top" alt={name} /></StyledLink></div>
       <ul className="list-group list-group-flush ">
         <StyledListItem theme={theme} className="list-group-item "><StyledAnchor href={url} theme={theme} target='_blank' data-toggle="tooltip" data-placement="top" title="See agency website"><strong>Agency name</strong> : {agenceName}</StyledAnchor></StyledListItem>
         <StyledListItem theme={theme} className="list-group-item"><strong>Rocket name</strong> : {rocketName}</StyledListItem>
