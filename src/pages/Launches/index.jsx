@@ -48,6 +48,23 @@ function Launches() {
     // list of launches : 
     const launchesList = data?.results;
 
+    // launches components
+    const launchComponents = launchesList?.map((launch) => (
+        <LaunchCard
+            key={launch.id}
+            id={launch.id}
+            name={launch.name}
+            agenceName={launch.mission.agencies[0]?.name ?? "Unknown"}
+            rocketName={launch.rocket.configuration.full_name ?? "Unknown"}
+            url={launch.mission.agencies[0]?.info_url ?? "/"}
+            image_url={launch.image !== null ? launch.image : rocketDefaultImage}
+            missionDescription={launch.mission.description}
+            net={launch.net}
+            statusName={launch.status.name}
+            statusId={launch.status.id}
+        />
+    ))
+
 
     if (error[0]) {
         return (<span>Get an issue during launches retrieval</span>)
@@ -57,27 +74,7 @@ function Launches() {
     return (<div>
         <PageTitle theme={theme}>Upcoming launches this month</PageTitle>
         <LaunchCardsContainer className='container-xxl'>
-
-            {isLoading ? (<Loader />) :
-                (launchesList?.map((launch) => (
-
-                    <LaunchCard
-                        key={launch.id}
-                        id={launch.id}
-                        name={launch.name}
-                        agenceName={launch.mission.agencies[0]?.name ?? "Unknown"}
-                        rocketName={launch.rocket.configuration.full_name ?? "Unknown"}
-                        url={launch.mission.agencies[0]?.info_url ?? "/"}
-                        image_url={launch.image !== null ? launch.image : rocketDefaultImage}
-                        missionDescription={launch.mission.description}
-                        net={launch.net}
-                        statusName={launch.status.name}
-                        statusId={launch.status.id}
-                    />)
-                ))
-            }
-
-
+            {isLoading ? (<Loader />) : launchComponents}
         </LaunchCardsContainer>
     </div>)
 }

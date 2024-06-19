@@ -63,8 +63,6 @@ const AccordionButton = styled.button`
 }
 
 `
-
-
 const MissionPatchesImg = styled.img`
 height : 100px;
 width : 100px;

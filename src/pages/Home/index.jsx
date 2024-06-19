@@ -49,8 +49,10 @@ function Home() {
     <HomeContainer className='container-xxl'>
       <PageTitle theme={theme}>Latest news</PageTitle>
       {isLoading ? (<Loader />) :
-        (
+        (<div>
+          <div>TEST</div>
           <Articles articlesList={articlesList} onlyFavourites={false} />
+        </div>
         )
 
       }
