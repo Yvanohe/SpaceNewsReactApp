@@ -30,7 +30,7 @@ jobs:
            server: ${{ secrets.FTP_SERVER }}
            username: ${{ secrets.FTP_USERNAME }}
            password: ${{ secrets.FTP_PASSWORD }}
-           local-dir: "./build"  # Dossier local à transférer
+           local-dir: "./build/"  # Dossier local à transférer
            server-dir: "./spacenewsapp"  # Chemin sur le serveur où les fichiers doivent être déployés
 
 
