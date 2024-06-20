@@ -7,7 +7,7 @@ import colors from "../../utils/style/colors";
 import PropTypes from 'prop-types'
 import { StyledAnchor } from "../../utils/style/Atoms";
 
-
+//NOT USED ANYMORE
 
 //Styled Components---------------------------------------
 const StyledCard = styled.div`

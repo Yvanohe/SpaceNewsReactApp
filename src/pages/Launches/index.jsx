@@ -12,15 +12,6 @@ import moment from 'moment'
 import CustomCalendarToolbar from '../../components/CustomCalendarToolbar';
 import { useNavigate } from "react-router-dom";
 
-// const LaunchCardsContainer = styled.div`
-// display: flex;
-// flex-wrap : wrap;
-// gap: 24px;
-// justify-content : center; 
-// align-items: center;
-// margin-bottom : 100px;
-
-// `
 
 const LaunchCardsContainer = styled.div`
 height: 100vh;
@@ -49,12 +40,7 @@ function Launches() {
     // To navigate to another page with react router :
     const navigate = useNavigate();
 
-    // return object with 2 attributes : first and last days of current date 's month in ISO String format
-    function getMonthStartAndEnd(date) {
-        const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-        const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-        return { startOfMonth: startOfMonth.toISOString(), endOfMonth: endOfMonth.toISOString() }
-    }
+
     // At first render, checking if we can use PROD API or DEV :
     useEffect(() => {
         //check number of request left on the LL2 API. If > limit -2 use ll2Dev (which have less data but not rate limits)
@@ -80,71 +66,34 @@ function Launches() {
                 end: moment(launch.window_end),
                 allDay: false,
                 id: launch.id
-
             }
         )
     })
 
+    // to customize Calendar's Toolbar
     const components = useMemo(() => (
         {
             toolbar: CustomCalendarToolbar
         }
     ), [])
 
-
+    // return object with 2 attributes : first and last days of current date 's month in ISO String format
+    function getMonthStartAndEnd(date) {
+        const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+        const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+        return { startOfMonth: startOfMonth.toISOString(), endOfMonth: endOfMonth.toISOString() }
+    }
+    //as we change month, we set a new CurrentDate and then set MonthStartAndEnd which will trigger the useEffect and then fetch data with a new URL (with right start and end dates)
     function handleNavigate(date, view) {
         console.log("Navigated to date:", date);  // Log the date to the console
         setCurrentDate(date);
         setMonthStartAndEnd(getMonthStartAndEnd(date))
     };
 
+    //navigate to launch page
     function handleEventClick(event) {
         navigate("/launch/" + event.id)
     }
-
-
-
-
-    // useEffect(() => {
-    //     //function to calculate date in a month from today :
-    //     function dateInAMonth() {
-    //         const date = new Date(); //today date at this point
-    //         date.setMonth(date.getMonth() + 1);
-    //         return date;
-    //     }
-    //     //check number of request left on the LL2 API. If > limit -2 use ll2Dev (which have less data but not rate limits)
-    //     fetch(apisURLs.throttleURL)
-    //         .then((response) => response.json())
-    //         //.then((data) => console.log(data.current_use))
-    //         .then((data) => (data.current_use >= data.your_request_limit) ? setUrl(apisURLs.upcomingLaunchesURL_DEV + "?limit=30&net__lte=" + dateInAMonth().toISOString()) : setUrl(apisURLs.upcomingLaunchesURL + "?limit=30&net__lte=" + dateInAMonth().toISOString()))
-    //         .catch(() => setUrl(apisURLs.upcomingLaunchesURL_DEV + "?limit=30&net__lte=" + dateInAMonth().toISOString()))
-    // }, []);
-
-
-
-
-    // launches components
-    // const launchComponents = launchesList?.map((launch) => {
-    //     console.log("laucch date " + launch.net);
-    //     console.log("moment" + moment().format());
-    //     console.log("moment net launch " + moment(launch.net))
-
-    //     return (
-    //         <LaunchCard
-    //             key={launch.id}
-    //             id={launch.id}
-    //             name={launch.name}
-    //             agenceName={launch.mission.agencies[0]?.name ?? "Unknown"}
-    //             rocketName={launch.rocket.configuration.full_name ?? "Unknown"}
-    //             url={launch.mission.agencies[0]?.info_url ?? "/"}
-    //             image_url={launch.image !== null ? launch.image : rocketDefaultImage}
-    //             missionDescription={launch.mission.description}
-    //             net={launch.net}
-    //             statusName={launch.status.name}
-    //             statusId={launch.status.id}
-    //         />)
-    // })
-
 
     if (error[0]) {
         return (<span>Get an issue during launches retrieval</span>)
