@@ -3,6 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
+//Big Calendar css :
+import "react-big-calendar/lib/css/react-big-calendar.css";
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
