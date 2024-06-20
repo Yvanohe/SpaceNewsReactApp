@@ -324,7 +324,7 @@ function Launch() {
                                                 <h3>Landing attempt for this mission</h3>
                                                 <ul> {data.rocket?.launcher_stage?.map((launcherStage) =>
                                                     <li key={"landing-" + launcherStage.launcher?.serial_number}>
-                                                        Launcher n°<em>{launcherStage.launcher?.serial_number ?? "Unknown"}</em> : {(launcherStage.landing.attempt) ? "Yes" : "No"}{(launcherStage.landing.success) ? (launcherStage.landing.success ? <StyledText color='green'> - successful landing</StyledText> : <StyledText color='red'> - landing failed</StyledText>) : null}
+                                                        Launcher n°<em>{launcherStage.launcher?.serial_number ?? "Unknown"}</em> : {(launcherStage.landing?.attempt) ? "Yes" : "No"}{(launcherStage.landing?.success) ? (launcherStage.landing?.success ? <StyledText color='green'> - successful landing</StyledText> : <StyledText color='red'> - landing failed</StyledText>) : null}
                                                     </li>
                                                 )}
                                                 </ul>
