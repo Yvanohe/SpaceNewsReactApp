@@ -1,9 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useFetch } from '../../utils/hooks';
-import LaunchCard from '../../components/LaunchCard';
 import styled from "styled-components"
 import { Loader, PageTitle } from '../../utils/style/Atoms';
-import rocketDefaultImage from '../../assets/rocket_default_image.png'
 import { ThemeContext } from "../../utils/context";
 import { useContext } from 'react'
 import apisURLs from '../../config/api_URLs';
