@@ -9,6 +9,8 @@ import { useContext } from 'react'
 import apisURLs from '../../config/api_URLs';
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
+import CustomCalendarToolbar from '../../components/CustomCalendarToolbar';
+import { useNavigate } from "react-router-dom";
 
 // const LaunchCardsContainer = styled.div`
 // display: flex;
@@ -22,14 +24,15 @@ import moment from 'moment'
 
 const LaunchCardsContainer = styled.div`
 height: 100vh;
-
-justify-content : center; 
+display: flex;
+flex-direction: column;
 align-items: center;
 margin-bottom : 100px;
-
-
+padding: 0;
 `
-
+const StyledCalendar = styled(Calendar)`
+width: 100%;
+`
 
 function Launches() {
     //Use Context to get theme (light or dark) :
@@ -43,6 +46,8 @@ function Launches() {
     //first and last day of current month
     const initialDate = new Date();
     const [monthStartAndEnd, setMonthStartAndEnd] = useState(getMonthStartAndEnd(initialDate));
+    // To navigate to another page with react router :
+    const navigate = useNavigate();
 
     // return object with 2 attributes : first and last days of current date 's month in ISO String format
     function getMonthStartAndEnd(date) {
@@ -60,6 +65,31 @@ function Launches() {
             .catch(() => setUrl(apisURLs.launcheURL_DEV + "?limit=50&net__gte=" + monthStartAndEnd.startOfMonth + "&net__lte=" + monthStartAndEnd.endOfMonth))
     }, [monthStartAndEnd]);
 
+    //Get futures launches from Launch Library 2 :    
+    const { data, isLoading, error } = useFetch(url);
+
+    // list of launches : 
+    const launchesList = data?.results;
+
+    //event for calendar :
+    const events = launchesList?.map((launch) => {
+        return (
+            {
+                title: launch.name,
+                start: moment(launch.window_start),
+                end: moment(launch.window_end),
+                allDay: false,
+                id: launch.id
+
+            }
+        )
+    })
+
+    const components = useMemo(() => (
+        {
+            toolbar: CustomCalendarToolbar
+        }
+    ), [])
 
 
     function handleNavigate(date, view) {
@@ -67,6 +97,12 @@ function Launches() {
         setCurrentDate(date);
         setMonthStartAndEnd(getMonthStartAndEnd(date))
     };
+
+    function handleEventClick(event) {
+        navigate("/launch/" + event.id)
+    }
+
+
 
 
     // useEffect(() => {
@@ -85,23 +121,7 @@ function Launches() {
     // }, []);
 
 
-    //Get futures launches from Launch Library 2 :    
-    const { data, isLoading, error } = useFetch(url);
 
-    // list of launches : 
-    const launchesList = data?.results;
-
-    //event for calendar :
-    const events = launchesList?.map((launch) => {
-        return (
-            {
-                title: launch.name,
-                start: moment(launch.window_start),
-                end: moment(launch.window_end),
-                allDay: false
-            }
-        )
-    })
 
     // launches components
     // const launchComponents = launchesList?.map((launch) => {
@@ -135,13 +155,15 @@ function Launches() {
         <PageTitle theme={theme}>Upcoming launches this month</PageTitle>
         <LaunchCardsContainer className='container-xxl'>
             {isLoading ? (<Loader />) : (
-                <Calendar
+                <StyledCalendar
                     localizer={localizer}
                     startAccessor="start"
                     endAccessor="end"
                     events={events}
                     onNavigate={handleNavigate}
+                    onSelectEvent={handleEventClick}
                     date={currentDate}
+                    components={components}
                 />
             )}
         </LaunchCardsContainer>
