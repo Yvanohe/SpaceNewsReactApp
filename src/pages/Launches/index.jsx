@@ -57,18 +57,16 @@ function Launches() {
     // list of launches : 
     const launchesList = data?.results;
 
-    //event for calendar :
-    const events = launchesList?.map((launch) => {
-        return (
-            {
-                title: launch.name,
-                start: moment(launch.window_start),
-                end: moment(launch.window_end),
-                allDay: false,
-                id: launch.id
-            }
-        )
-    })
+    //"events" for calendar :
+    const events = launchesList?.map((launch) => (
+        {
+            title: launch.name,
+            start: moment(launch.window_start),
+            end: moment(launch.window_end),
+            allDay: false,
+            id: launch.id
+        }
+    ))
 
     // to customize Calendar's Toolbar
     const components = useMemo(() => (
@@ -83,6 +81,7 @@ function Launches() {
         const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 1);
         return { startOfMonth: startOfMonth.toISOString(), endOfMonth: endOfMonth.toISOString() }
     }
+
     //as we change month, we set a new CurrentDate and then set MonthStartAndEnd which will trigger the useEffect and then fetch data with a new URL (with right start and end dates)
     function handleNavigate(date, view) {
         console.log("Navigated to date:", date);  // Log the date to the console
@@ -95,10 +94,10 @@ function Launches() {
         navigate("/launch/" + event.id)
     }
 
+
     if (error[0]) {
         return (<span>Get an issue during launches retrieval</span>)
     }
-
 
     return (<div>
         <PageTitle theme={theme}>Upcoming launches this month</PageTitle>
@@ -113,6 +112,7 @@ function Launches() {
                     onSelectEvent={handleEventClick}
                     date={currentDate}
                     components={components}
+                    popup
                 />
             )}
         </LaunchCardsContainer>
