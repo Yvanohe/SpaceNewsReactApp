@@ -125,7 +125,7 @@ function Launch() {
 
     // To avoid flicking between the 2 useEffect, we need a general loading state which change to false only when url is laoded and fetching data isLoading state is to false 
     useEffect(() => {
-        if (!isLoading) {
+        if (url && !isLoading) {
             setIsGeneralLoading(false)
         }
     }, [url, isLoading])
