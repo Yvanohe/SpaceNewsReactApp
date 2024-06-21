@@ -2,12 +2,11 @@ import { useState, useEffect } from 'react'
 
 export function useFetch(url) {
     const [data, setData] = useState({});
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState([false, "no error"]);
 
     useEffect(() => {
         if (!url) {
-            setLoading(false)
             return
         }
         setLoading(true)

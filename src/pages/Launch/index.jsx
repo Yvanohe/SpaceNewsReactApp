@@ -101,8 +101,9 @@ function Launch() {
 
     // url subject to change 
     const [url, setUrl] = useState("");
-    //To track when the api (dev or prod) has been determined (with the throttleURL)
-    const [isUrlLoading, setUrlLoading] = useState(true);
+
+    //state of general loading (loading of url & fetching data) :
+    const [isGeneralLoading, setIsGeneralLoading] = useState(true)
 
     const [istoggleChecked, setToggleStatus] = useState(false);
     function handleToggleChange() {
@@ -110,20 +111,24 @@ function Launch() {
     }
     // At first render, checking if we can use PROD API or DEV :
     useEffect(() => {
+        setIsGeneralLoading(true)
         //check number of request left on the LL2 API. If > limit -2 use ll2Dev (which have less data but not rate limits)
         fetch(apisURLs.throttleURL)
             .then((response) => response.json())
             .then((data) => (
                 data.current_use >= data.your_request_limit) ? setUrl(apisURLs.launcheURL_DEV + launchId) : setUrl(apisURLs.launcheURL + launchId))
             .catch(() => setUrl(apisURLs.launcheURL_DEV + launchId))
-            .finally(() => setUrlLoading(false))
-
-
-
     }, [launchId]);
 
     //Get launch detail from Launch Library 2 :  
     const { data, isLoading, error } = useFetch(url);
+
+    // To avoid flicking between the 2 useEffect, we need a general loading state which change to false only when url is laoded and fetching data isLoading state is to false 
+    useEffect(() => {
+        if (!isLoading) {
+            setIsGeneralLoading(false)
+        }
+    }, [url, isLoading])
 
     function getTextColorFromStatus(statusId) {
         switch (statusId) {
@@ -169,7 +174,7 @@ function Launch() {
             <PageTitle theme={theme}>{data.name ?? ""}</PageTitle>
 
 
-            {(isLoading || isUrlLoading) ? (<Loader />) :
+            {(isGeneralLoading) ? (<Loader />) :
 
                 (<AccordionContainer>
                     <FormSwitch theme={theme} className="form-check form-switch">

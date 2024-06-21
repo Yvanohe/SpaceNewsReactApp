@@ -28,6 +28,8 @@ function Launches() {
     const { theme } = useContext(ThemeContext);
     // url subject to change 
     const [url, setUrl] = useState("");
+    //state of general loading (loading of url & fetching data) :
+    const [isGeneralLoading, setIsGeneralLoading] = useState(true)
     // Set up the localizer
     const localizer = momentLocalizer(moment)
     // current date of the displayed month of calendar :
@@ -41,6 +43,7 @@ function Launches() {
 
     // At first render, checking if we can use PROD API or DEV :
     useEffect(() => {
+        setIsGeneralLoading(true);
         //check number of request left on the LL2 API. If > limit -2 use ll2Dev (which have less data but not rate limits)
         fetch(apisURLs.throttleURL)
             .then((response) => response.json())
@@ -51,6 +54,13 @@ function Launches() {
 
     //Get futures launches from Launch Library 2 :    
     const { data, isLoading, error } = useFetch(url);
+
+    // To avoid flicking between the 2 useEffect, we need a general loading state which change to false only when url is laoded and fetching data isLoading state is to false 
+    useEffect(() => {
+        if (url && !isLoading) {
+            setIsGeneralLoading(false)
+        }
+    }, [url, isLoading])
 
     // list of launches : 
     const launchesList = data?.results;
@@ -97,10 +107,11 @@ function Launches() {
         return (<span>Get an issue during launches retrieval</span>)
     }
 
+
     return (<div>
         <PageTitle theme={theme}>Upcoming launches this month</PageTitle>
         <LaunchCardsContainer className='container-xxl'>
-            {isLoading ? (<Loader />) : (
+            {(isGeneralLoading) ? (<Loader />) : (
                 <StyledCalendar
                     localizer={localizer}
                     startAccessor="start"
