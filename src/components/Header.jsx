@@ -27,11 +27,13 @@ height : 100px;
 
 const HeaderContainer = styled.header`
 height : 150px;
-border: "2px solid black";
+width: 100vw;
 `
 
 const NavBar = styled.nav`
 position : fixed ;
+padding-left: calc(100vw - 100%); // to prevent shifting because of apparition of scroll bar
+width: 100%;
 top:0;
 right : 0;
 left : 0;
