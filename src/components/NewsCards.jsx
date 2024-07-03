@@ -3,7 +3,6 @@ import { reformateDate } from "../utils/tools"
 import { useContext } from 'react'
 import { ThemeContext } from "../services/providers/theme";
 import colors from "../utils/colors";
-import PropTypes from 'prop-types'
 import { StyledAnchor } from "./ui/Atoms";
 
 
