@@ -1,18 +1,18 @@
 import { useParams } from "react-router-dom"
-import { useFetch } from "../../utils/hooks";
+import { useFetch } from "../hooks/useFetch";
 import { useState, useEffect } from "react";
-import { Loader, PageTitle } from "../../utils/style/Atoms";
-import apisURLs from '../../config/api_URLs';
+import { Loader, PageTitle } from "../components/ui/Atoms";
+import apisURLs from '../services/api/api_URLs';
 import styled from "styled-components";
-import { reformateDate } from "../../utils/tools";
-import { StyledAnchor } from "../../utils/style/Atoms";
+import { reformateDate } from "../utils/tools";
+import { StyledAnchor } from "../components/ui/Atoms";
 import { useContext } from 'react'
-import { ThemeContext } from "../../utils/context";
+import { ThemeContext } from "../services/providers/theme";
 import { MapContainer, Marker, TileLayer, Tooltip } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import makerIcon from 'leaflet/dist/images/marker-icon.png';
 import { Icon } from 'leaflet'
-import colors from "../../utils/style/colors";
+import colors from "../utils/colors";
 
 
 

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import logo from '../../assets/logo.png'
+import logo from '../assets/logo.png'
 import styled from "styled-components";
 import { useContext } from 'react'
-import { ThemeContext } from "../../utils/context";
-import colors from '../../utils/style/colors'
+import { ThemeContext } from "../services/providers/theme";
+import colors from '../utils/colors'
 
 
 

@@ -1,10 +1,10 @@
-import ResearchForm from "../../components/ResearchForm";
+import ResearchForm from "../components/ResearchForm";
 import styled from 'styled-components';
 import { useState } from "react";
-import { useFetch } from '../../utils/hooks'
-import { Loader, PageTitle } from '../../utils/style/Atoms';
-import Articles from "../../components/Articles";
-import { ThemeContext } from "../../utils/context";
+import { useFetch } from '../hooks/useFetch'
+import { Loader, PageTitle } from '../components/ui/Atoms';
+import Articles from "../components/Articles";
+import { ThemeContext } from "../services/providers/theme";
 import { useContext } from 'react'
 
 const FormContainer = styled.div`

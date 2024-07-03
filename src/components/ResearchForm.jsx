@@ -1,4 +1,4 @@
-import apisURLs from '../../config/api_URLs';
+import apisURLs from '../services/api/api_URLs';
 
 function ResearchForm({ setUrl, inputValues, setInputValues }) {
 

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Loader, PageTitle } from "../../utils/style/Atoms";
-import Articles from "../../components/Articles";
+import { Loader, PageTitle } from "../components/ui/Atoms";
+import Articles from "../components/Articles";
 import styled from 'styled-components';
-import { ThemeContext } from "../../utils/context";
+import { ThemeContext } from "../services/providers/theme";
 import { useContext } from 'react'
-import apisURLs from "../../config/api_URLs";
+import apisURLs from "../services/api/api_URLs";
 
 
 const FavoritesContainer = styled.div`

@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 import { useContext } from 'react'
-import { ThemeContext } from '../context'
-import colors from '../../utils/style/colors'
+import { ThemeContext } from '../services/providers/theme'
+import colors from './colors'
 
 
 const StyledGlobalStyle = createGlobalStyle`

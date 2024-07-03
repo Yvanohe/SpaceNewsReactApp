@@ -1,13 +1,13 @@
 import { useEffect, useState, useMemo } from 'react';
-import { useFetch } from '../../utils/hooks';
+import { useFetch } from '../hooks/useFetch';
 import styled from "styled-components"
-import { Loader, PageTitle } from '../../utils/style/Atoms';
-import { ThemeContext } from "../../utils/context";
+import { Loader, PageTitle } from '../components/ui/Atoms';
+import { ThemeContext } from "../services/providers/theme";
 import { useContext } from 'react'
-import apisURLs from '../../config/api_URLs';
+import apisURLs from '../services/api/api_URLs';
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
-import CustomCalendarToolbar from '../../components/CustomCalendarToolbar';
+import CustomCalendarToolbar from '../components/ui/CustomCalendarToolbar';
 import { useNavigate } from "react-router-dom";
 
 

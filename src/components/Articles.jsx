@@ -1,4 +1,4 @@
-import NewsCard from "../NewsCard"
+import NewsCard from "./NewsCards"
 import styled from 'styled-components';
 import { useState, useEffect } from 'react'
 

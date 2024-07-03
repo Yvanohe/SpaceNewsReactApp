@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { ThemeContext } from "../../utils/context";
-import colors from "../../utils/style/colors";
+import { ThemeContext } from "../../services/providers/theme";
+import colors from "../../utils/colors";
 import { useContext } from 'react'
 
 const LabelContainer = styled.div`

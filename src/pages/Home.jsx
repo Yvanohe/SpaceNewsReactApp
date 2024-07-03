@@ -1,10 +1,10 @@
-import Articles from '../../components/Articles';
+import Articles from '../components/Articles';
 import styled from 'styled-components';
-import { useFetch } from '../../utils/hooks'
-import { Loader, PageTitle } from '../../utils/style/Atoms';
-import { ThemeContext } from "../../utils/context";
+import { useFetch } from '../hooks/useFetch'
+import { Loader, PageTitle } from '../components/ui/Atoms';
+import { ThemeContext } from "../services/providers/theme";
 import { useContext, useState } from 'react'
-import apisURLs from '../../config/api_URLs';
+import apisURLs from '../services/api/api_URLs';
 
 
 const HomeContainer = styled.div`
