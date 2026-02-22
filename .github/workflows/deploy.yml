@@ -24,14 +24,15 @@ jobs:
         - name: Build the app
           run: npm run build
 
-        - name: FTP Deploy
-          uses: SamKirkland/FTP-Deploy-Action@4.2.0
+        - name: SFTP Deploy
+          uses: wlixcc/SFTP-Deploy-Action@v1.2.4
           with:
-           server: ${{ secrets.FTP_SERVER }}
-           username: ${{ secrets.FTP_USERNAME }}
-           password: ${{ secrets.FTP_PASSWORD }}
-           local-dir: "./build/"  # Dossier local à transférer
-           server-dir: "./spacenewsapp/"  # Chemin sur le serveur où les fichiers doivent être déployés
+            server: ${{ secrets.SSH_SERVER }}
+            username: ${{ secrets.SSH_USERNAME }}
+            password: ${{ secrets.SSH_PASSWORD }}
+            port: ${{ secrets.SSH_PORT}}
+            local-dir: "./build/"  # Dossier local à transférer
+            server-dir: "./htdocs/www.yvan-lubac.fr/spacenewsapp/"  # Chemin sur le serveur où les fichiers doivent être déployés
 
 
 
